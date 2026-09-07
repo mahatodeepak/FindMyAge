@@ -216,38 +216,176 @@
 
   <script>
 
-    // Set today's date automatically
-    const today = new Date();
+  // Set today's date automatically
+  const today = new Date();
 
-    const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, "0");
-    const dd = String(today.getDate()).padStart(2, "0");
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, "0");
+  const dd = String(today.getDate()).padStart(2, "0");
 
-    document.getElementById("ageDate").value =
-      `${yyyy}-${mm}-${dd}`;
+  document.getElementById("ageDate").value =
+    `${yyyy}-${mm}-${dd}`;
 
 
-    function calculateAge() {
+  function calculateAge() {
 
-      const dob =
-        document.getElementById("dob").value;
+    const dobValue =
+      document.getElementById("dob").value;
 
-      const ageDate =
-        document.getElementById("ageDate").value;
+    const ageDateValue =
+      document.getElementById("ageDate").value;
 
-      if (!dob) {
-        alert("Please enter your date of birth.");
-        return;
-      }
 
-      if (!ageDate) {
-        alert("Please select the date.");
-        return;
-      }
-
-      alert("Age calculation will be added in Step 2.");
-
+    // Check DOB
+    if (!dobValue) {
+      alert("Please enter your date of birth.");
+      return;
     }
+
+    // Check age date
+    if (!ageDateValue) {
+      alert("Please select the date.");
+      return;
+    }
+
+
+    // Convert input dates
+    const dob = new Date(dobValue + "T00:00:00");
+    const ageDate = new Date(ageDateValue + "T00:00:00");
+
+
+    // DOB cannot be in the future
+    if (dob > today) {
+      alert("Date of birth cannot be in the future.");
+      return;
+    }
+
+
+    // Age date cannot be before DOB
+    if (ageDate < dob) {
+      alert("The calculation date cannot be before the date of birth.");
+      return;
+    }
+
+
+    // Calculate initial differences
+    let years =
+      ageDate.getFullYear() - dob.getFullYear();
+
+    let months =
+      ageDate.getMonth() - dob.getMonth();
+
+    let days =
+      ageDate.getDate() - dob.getDate();
+
+
+    // If days are negative,
+    // borrow days from the previous month
+    if (days < 0) {
+
+      months--;
+
+      const previousMonth =
+        new Date(
+          ageDate.getFullYear(),
+          ageDate.getMonth(),
+          0
+        );
+
+      days += previousMonth.getDate();
+    }
+
+
+    // If months are negative,
+    // borrow one year
+    if (months < 0) {
+
+      years--;
+      months += 12;
+    }
+
+
+    // Create result box
+    const resultHTML = `
+
+      <div id="ageResult"
+           style="
+             margin-top:25px;
+             padding:20px;
+             background:#eff6ff;
+             border-radius:12px;
+             text-align:center;
+             border:1px solid #bfdbfe;
+           ">
+
+        <h2 style="color:#1e3a8a;">
+          🎂 Your Exact Age
+        </h2>
+
+        <div style="
+          font-size:28px;
+          font-weight:bold;
+          margin:15px 0;
+          color:#2563eb;
+        ">
+
+          ${years} Years,
+          ${months} Months,
+          ${days} Days
+
+        </div>
+
+        <p style="color:#555;">
+          Date of Birth:
+          <strong>${formatDate(dob)}</strong>
+        </p>
+
+        <p style="color:#555;">
+          Age calculated as on:
+          <strong>${formatDate(ageDate)}</strong>
+        </p>
+
+      </div>
+
+    `;
+
+
+    // Remove old result if present
+    const oldResult =
+      document.getElementById("ageResult");
+
+    if (oldResult) {
+      oldResult.remove();
+    }
+
+
+    // Add result after button
+    const button =
+      document.querySelector("button");
+
+    button.insertAdjacentHTML(
+      "afterend",
+      resultHTML
+    );
+
+  }
+
+
+  // Format date as DD Month YYYY
+  function formatDate(date) {
+
+    const options = {
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    };
+
+    return date.toLocaleDateString(
+      "en-IN",
+      options
+    );
+
+  }
 
   </script>
 
