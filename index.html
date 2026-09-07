@@ -216,7 +216,7 @@
 
   <script>
 
-  // Set today's date automatically
+  // Today's date
   const today = new Date();
 
   const yyyy = today.getFullYear();
@@ -242,45 +242,55 @@
       return;
     }
 
-    // Check age date
+
+    // Check calculation date
     if (!ageDateValue) {
-      alert("Please select the date.");
+      alert("Please select the calculation date.");
       return;
     }
 
 
-    // Convert input dates
-    const dob = new Date(dobValue + "T00:00:00");
-    const ageDate = new Date(ageDateValue + "T00:00:00");
+    const dob =
+      new Date(dobValue + "T00:00:00");
+
+    const ageDate =
+      new Date(ageDateValue + "T00:00:00");
 
 
-    // DOB cannot be in the future
+    // Future DOB
     if (dob > today) {
       alert("Date of birth cannot be in the future.");
       return;
     }
 
 
-    // Age date cannot be before DOB
+    // Date before DOB
     if (ageDate < dob) {
-      alert("The calculation date cannot be before the date of birth.");
+      alert(
+        "The calculation date cannot be before the date of birth."
+      );
       return;
     }
 
 
-    // Calculate initial differences
+    // -----------------------------
+    // EXACT AGE
+    // -----------------------------
+
     let years =
-      ageDate.getFullYear() - dob.getFullYear();
+      ageDate.getFullYear() -
+      dob.getFullYear();
 
     let months =
-      ageDate.getMonth() - dob.getMonth();
+      ageDate.getMonth() -
+      dob.getMonth();
 
     let days =
-      ageDate.getDate() - dob.getDate();
+      ageDate.getDate() -
+      dob.getDate();
 
 
-    // If days are negative,
-    // borrow days from the previous month
+    // Borrow days
     if (days < 0) {
 
       months--;
@@ -296,16 +306,117 @@
     }
 
 
-    // If months are negative,
-    // borrow one year
+    // Borrow months
     if (months < 0) {
 
       years--;
+
       months += 12;
     }
 
 
-    // Create result box
+    // -----------------------------
+    // DAY OF BIRTH
+    // -----------------------------
+
+    const dayNames = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ];
+
+    const birthDay =
+      dayNames[dob.getDay()];
+
+
+    // -----------------------------
+    // NEXT BIRTHDAY
+    // -----------------------------
+
+    let nextBirthday =
+      new Date(
+        ageDate.getFullYear(),
+        dob.getMonth(),
+        dob.getDate()
+      );
+
+
+    // If birthday already passed,
+    // use next year
+    if (nextBirthday < ageDate) {
+
+      nextBirthday =
+        new Date(
+          ageDate.getFullYear() + 1,
+          dob.getMonth(),
+          dob.getDate()
+        );
+
+    }
+
+
+    // Special handling for Feb 29
+    if (
+      dob.getMonth() === 1 &&
+      dob.getDate() === 29 &&
+      nextBirthday.getMonth() !== 1
+    ) {
+
+      nextBirthday =
+        new Date(
+          nextBirthday.getFullYear(),
+          1,
+          28
+        );
+
+    }
+
+
+    // -----------------------------
+    // DAYS UNTIL BIRTHDAY
+    // -----------------------------
+
+    const millisecondsPerDay =
+      1000 * 60 * 60 * 24;
+
+    const daysUntilBirthday =
+      Math.ceil(
+        (nextBirthday - ageDate) /
+        millisecondsPerDay
+      );
+
+
+    // -----------------------------
+    // TOTAL DAYS LIVED
+    // -----------------------------
+
+    const totalDays =
+      Math.floor(
+        (ageDate - dob) /
+        millisecondsPerDay
+      );
+
+
+    // -----------------------------
+    // REMOVE OLD RESULT
+    // -----------------------------
+
+    const oldResult =
+      document.getElementById("ageResult");
+
+    if (oldResult) {
+      oldResult.remove();
+    }
+
+
+    // -----------------------------
+    // RESULT
+    // -----------------------------
+
     const resultHTML = `
 
       <div id="ageResult"
@@ -319,8 +430,9 @@
            ">
 
         <h2 style="color:#1e3a8a;">
-          🎂 Your Exact Age
+          🎂 Your Age
         </h2>
+
 
         <div style="
           font-size:28px;
@@ -335,14 +447,54 @@
 
         </div>
 
-        <p style="color:#555;">
-          Date of Birth:
-          <strong>${formatDate(dob)}</strong>
+
+        <hr style="
+          margin:20px 0;
+          border:none;
+          border-top:1px solid #ddd;
+        ">
+
+
+        <p style="margin:12px 0;">
+          📅 <strong>Date of Birth</strong><br>
+          ${formatDate(dob)}
         </p>
 
-        <p style="color:#555;">
-          Age calculated as on:
-          <strong>${formatDate(ageDate)}</strong>
+
+        <p style="margin:12px 0;">
+          🗓️ <strong>You were born on</strong><br>
+          ${birthDay}
+        </p>
+
+
+        <p style="margin:12px 0;">
+          🎉 <strong>Next Birthday</strong><br>
+          ${formatDate(nextBirthday)}
+        </p>
+
+
+        <p style="
+          margin:15px 0;
+          font-size:20px;
+          font-weight:bold;
+          color:#16a34a;
+        ">
+
+          ⏳ ${daysUntilBirthday}
+          days to go for your next birthday
+
+        </p>
+
+
+        <p style="margin:12px 0;">
+          📊 <strong>Total Days Lived</strong><br>
+          ${totalDays.toLocaleString("en-IN")} days
+        </p>
+
+
+        <p style="margin:12px 0;">
+          📆 <strong>Age calculated as on</strong><br>
+          ${formatDate(ageDate)}
         </p>
 
       </div>
@@ -350,16 +502,7 @@
     `;
 
 
-    // Remove old result if present
-    const oldResult =
-      document.getElementById("ageResult");
-
-    if (oldResult) {
-      oldResult.remove();
-    }
-
-
-    // Add result after button
+    // Add result
     const button =
       document.querySelector("button");
 
@@ -371,18 +514,19 @@
   }
 
 
-  // Format date as DD Month YYYY
-  function formatDate(date) {
+  // -----------------------------
+  // DATE FORMAT
+  // -----------------------------
 
-    const options = {
-      day: "numeric",
-      month: "long",
-      year: "numeric"
-    };
+  function formatDate(date) {
 
     return date.toLocaleDateString(
       "en-IN",
-      options
+      {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      }
     );
 
   }
