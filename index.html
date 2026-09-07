@@ -214,7 +214,7 @@
     © 2026 Find My Age · Free Age Calculator
   </footer>
 
-  <script>
+<script>
 
   // Today's date
   const today = new Date();
@@ -236,14 +236,11 @@
       document.getElementById("ageDate").value;
 
 
-    // Check DOB
     if (!dobValue) {
       alert("Please enter your date of birth.");
       return;
     }
 
-
-    // Check calculation date
     if (!ageDateValue) {
       alert("Please select the calculation date.");
       return;
@@ -257,17 +254,15 @@
       new Date(ageDateValue + "T00:00:00");
 
 
-    // Future DOB
     if (dob > today) {
       alert("Date of birth cannot be in the future.");
       return;
     }
 
 
-    // Date before DOB
     if (ageDate < dob) {
       alert(
-        "The calculation date cannot be before the date of birth."
+        "The calculation date cannot be before your date of birth."
       );
       return;
     }
@@ -290,7 +285,6 @@
       dob.getDate();
 
 
-    // Borrow days
     if (days < 0) {
 
       months--;
@@ -306,7 +300,6 @@
     }
 
 
-    // Borrow months
     if (months < 0) {
 
       years--;
@@ -345,8 +338,6 @@
       );
 
 
-    // If birthday already passed,
-    // use next year
     if (nextBirthday < ageDate) {
 
       nextBirthday =
@@ -359,7 +350,7 @@
     }
 
 
-    // Special handling for Feb 29
+    // Leap year birthday
     if (
       dob.getMonth() === 1 &&
       dob.getDate() === 29 &&
@@ -391,7 +382,7 @@
 
 
     // -----------------------------
-    // TOTAL DAYS LIVED
+    // TOTAL DAYS
     // -----------------------------
 
     const totalDays =
@@ -399,6 +390,18 @@
         (ageDate - dob) /
         millisecondsPerDay
       );
+
+
+    // -----------------------------
+    // RESULT TEXT
+    // -----------------------------
+
+    const resultText =
+      `My age is ${years} years, ` +
+      `${months} months and ${days} days. ` +
+      `Born on ${formatDate(dob)} (${birthDay}). ` +
+      `Next birthday: ${formatDate(nextBirthday)}. ` +
+      `${daysUntilBirthday} days remaining.`;
 
 
     // -----------------------------
@@ -414,7 +417,7 @@
 
 
     // -----------------------------
-    // RESULT
+    // RESULT CARD
     // -----------------------------
 
     const resultHTML = `
@@ -422,79 +425,137 @@
       <div id="ageResult"
            style="
              margin-top:25px;
-             padding:20px;
-             background:#eff6ff;
-             border-radius:12px;
+             padding:25px;
+             background:white;
+             border-radius:16px;
              text-align:center;
-             border:1px solid #bfdbfe;
+             border:1px solid #dbeafe;
+             box-shadow:0 6px 20px rgba(0,0,0,0.08);
            ">
 
-        <h2 style="color:#1e3a8a;">
-          🎂 Your Age
+        <div style="
+          font-size:45px;
+          margin-bottom:5px;
+        ">
+          🎂
+        </div>
+
+
+        <h2 style="
+          color:#1e3a8a;
+          margin-bottom:10px;
+        ">
+          Your Exact Age
         </h2>
 
 
         <div style="
-          font-size:28px;
+          font-size:30px;
           font-weight:bold;
-          margin:15px 0;
+          margin:18px 0;
           color:#2563eb;
+          line-height:1.4;
         ">
 
-          ${years} Years,
-          ${months} Months,
+          ${years} Years<br>
+          ${months} Months<br>
           ${days} Days
 
         </div>
 
 
-        <hr style="
-          margin:20px 0;
-          border:none;
-          border-top:1px solid #ddd;
+        <div style="
+          background:#f8fafc;
+          padding:15px;
+          border-radius:10px;
+          margin-top:20px;
+          text-align:left;
         ">
 
-
-        <p style="margin:12px 0;">
-          📅 <strong>Date of Birth</strong><br>
-          ${formatDate(dob)}
-        </p>
-
-
-        <p style="margin:12px 0;">
-          🗓️ <strong>You were born on</strong><br>
-          ${birthDay}
-        </p>
+          <p style="margin:10px 0;">
+            📅 <strong>Date of Birth:</strong><br>
+            ${formatDate(dob)}
+          </p>
 
 
-        <p style="margin:12px 0;">
-          🎉 <strong>Next Birthday</strong><br>
-          ${formatDate(nextBirthday)}
-        </p>
+          <p style="margin:10px 0;">
+            🗓️ <strong>Day of Birth:</strong><br>
+            ${birthDay}
+          </p>
+
+
+          <p style="margin:10px 0;">
+            🎉 <strong>Next Birthday:</strong><br>
+            ${formatDate(nextBirthday)}
+          </p>
+
+
+          <p style="margin:10px 0;">
+            ⏳ <strong>Days Until Birthday:</strong><br>
+            ${daysUntilBirthday} days
+          </p>
+
+
+          <p style="margin:10px 0;">
+            📊 <strong>Total Days Lived:</strong><br>
+            ${totalDays.toLocaleString("en-IN")} days
+          </p>
+
+
+          <p style="margin:10px 0;">
+            📆 <strong>Age As On:</strong><br>
+            ${formatDate(ageDate)}
+          </p>
+
+        </div>
+
+
+        <!-- ACTION BUTTONS -->
+
+        <div style="
+          display:grid;
+          grid-template-columns:1fr 1fr;
+          gap:10px;
+          margin-top:20px;
+        ">
+
+          <button
+            onclick="copyResult()"
+            style="
+              background:#16a34a;
+            ">
+            📋 Copy
+          </button>
+
+
+          <button
+            onclick="shareResult()"
+            style="
+              background:#7c3aed;
+            ">
+            📤 Share
+          </button>
+
+        </div>
+
+
+        <button
+          onclick="resetCalculator()"
+          style="
+            margin-top:10px;
+            background:#64748b;
+          ">
+          🔄 Calculate Again
+        </button>
 
 
         <p style="
-          margin:15px 0;
-          font-size:20px;
-          font-weight:bold;
-          color:#16a34a;
+          margin-top:18px;
+          font-size:12px;
+          color:#777;
         ">
-
-          ⏳ ${daysUntilBirthday}
-          days to go for your next birthday
-
-        </p>
-
-
-        <p style="margin:12px 0;">
-          📊 <strong>Total Days Lived</strong><br>
-          ${totalDays.toLocaleString("en-IN")} days
-        </p>
-
-
-        <p style="margin:12px 0;">
-          📆 <strong>Age calculated as on</strong><br>
-          ${formatDate(ageDate)}
+          🔒 Your date of birth is calculated
+          locally on your device.
         </p>
 
       </div>
@@ -502,14 +563,105 @@
     `;
 
 
-    // Add result
     const button =
-      document.querySelector("button");
+      document.querySelector(".card button");
 
     button.insertAdjacentHTML(
       "afterend",
       resultHTML
     );
+
+
+    // Save result for Copy / Share
+    window.currentAgeResult =
+      resultText;
+
+  }
+
+
+  // -----------------------------
+  // COPY RESULT
+  // -----------------------------
+
+  function copyResult() {
+
+    if (!window.currentAgeResult) {
+      return;
+    }
+
+
+    navigator.clipboard.writeText(
+      window.currentAgeResult
+    )
+    .then(() => {
+
+      alert("Age result copied! 📋");
+
+    })
+    .catch(() => {
+
+      alert("Unable to copy the result.");
+
+    });
+
+  }
+
+
+  // -----------------------------
+  // SHARE RESULT
+  // -----------------------------
+
+  function shareResult() {
+
+    if (!window.currentAgeResult) {
+      return;
+    }
+
+
+    if (navigator.share) {
+
+      navigator.share({
+
+        title: "My Age",
+        text: window.currentAgeResult
+
+      });
+
+    } else {
+
+      copyResult();
+
+      alert(
+        "Sharing is not supported on this browser. " +
+        "The result has been copied instead."
+      );
+
+    }
+
+  }
+
+
+  // -----------------------------
+  // RESET
+  // -----------------------------
+
+  function resetCalculator() {
+
+    document.getElementById("dob").value = "";
+
+    document.getElementById("ageDate").value =
+      `${yyyy}-${mm}-${dd}`;
+
+
+    const result =
+      document.getElementById("ageResult");
+
+    if (result) {
+      result.remove();
+    }
+
+
+    window.currentAgeResult = "";
 
   }
 
@@ -531,7 +683,14 @@
 
   }
 
-  </script>
+</script>
+
+    
+    
+
+        <p style="margin:12px 0;">
+        
+    
 
 </body>
 </html>
