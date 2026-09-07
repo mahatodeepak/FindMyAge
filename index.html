@@ -548,7 +548,370 @@
   }
 
 </script>
+  <!-- BIRTHDAY COUNTDOWN -->
 
+<section class="container">
+
+  <div class="card">
+
+    <h2>🎂 Birthday Countdown</h2>
+
+    <p class="subtitle">
+      Find out how many days are left until your next birthday.
+    </p>
+
+    <div class="form-group">
+
+      <label for="birthdayDob">
+        🎂 Your Date of Birth
+      </label>
+
+      <input
+        type="date"
+        id="birthdayDob"
+      >
+
+    </div>
+
+    <button onclick="birthdayCountdown()">
+      🎉 Start Countdown
+    </button>
+
+    <div id="birthdayResult"></div>
+
+  </div>
+
+</section>
+
+
+<script>
+
+  function birthdayCountdown() {
+
+    const dobValue =
+      document.getElementById("birthdayDob").value;
+
+
+    if (!dobValue) {
+
+      alert("Please enter your date of birth.");
+
+      return;
+    }
+
+
+    const dob =
+      new Date(dobValue + "T00:00:00");
+
+
+    const now =
+      new Date();
+
+
+    // Check future DOB
+
+    if (dob > now) {
+
+      alert(
+        "Date of birth cannot be in the future."
+      );
+
+      return;
+    }
+
+
+    // Current year
+
+    let nextBirthday =
+      new Date(
+        now.getFullYear(),
+        dob.getMonth(),
+        dob.getDate()
+      );
+
+
+    // If birthday has already passed
+
+    if (nextBirthday < now) {
+
+      nextBirthday =
+        new Date(
+          now.getFullYear() + 1,
+          dob.getMonth(),
+          dob.getDate()
+        );
+
+    }
+
+
+    // Special case: February 29
+
+    if (
+      dob.getMonth() === 1 &&
+      dob.getDate() === 29
+    ) {
+
+      const year =
+        nextBirthday.getFullYear();
+
+
+      const isLeapYear =
+        (
+          year % 4 === 0 &&
+          year % 100 !== 0
+        ) ||
+        year % 400 === 0;
+
+
+      if (!isLeapYear) {
+
+        nextBirthday =
+          new Date(
+            year,
+            1,
+            28
+          );
+
+      }
+
+    }
+
+
+    // Calculate difference
+
+    const difference =
+      nextBirthday.getTime() -
+      now.getTime();
+
+
+    const totalSeconds =
+      Math.floor(
+        difference / 1000
+      );
+
+
+    const totalMinutes =
+      Math.floor(
+        totalSeconds / 60
+      );
+
+
+    const totalHours =
+      Math.floor(
+        totalMinutes / 60
+      );
+
+
+    const totalDays =
+      Math.floor(
+        totalHours / 24
+      );
+
+
+    const hours =
+      totalHours % 24;
+
+
+    const minutes =
+      totalMinutes % 60;
+
+
+    const seconds =
+      totalSeconds % 60;
+
+
+    // Next birthday weekday
+
+    const dayNames = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ];
+
+
+    const birthdayDay =
+      dayNames[nextBirthday.getDay()];
+
+
+    // Calculate age turning
+
+    let turningAge =
+      nextBirthday.getFullYear() -
+      dob.getFullYear();
+
+
+    // Result
+
+    document.getElementById(
+      "birthdayResult"
+    ).innerHTML = `
+
+      <div style="
+        margin-top:25px;
+        padding:25px;
+        background:white;
+        border-radius:16px;
+        text-align:center;
+        border:1px solid #ddd;
+        box-shadow:0 6px 20px rgba(0,0,0,0.08);
+      ">
+
+        <div style="
+          font-size:55px;
+          margin-bottom:10px;
+        ">
+          🎂
+        </div>
+
+
+        <h2 style="
+          color:#7c3aed;
+          margin-bottom:15px;
+        ">
+          Your Next Birthday
+        </h2>
+
+
+        <div style="
+          font-size:32px;
+          font-weight:bold;
+          color:#2563eb;
+          margin:15px 0;
+        ">
+
+          ${totalDays} Days
+
+        </div>
+
+
+        <p style="
+          font-size:18px;
+          margin:10px 0;
+        ">
+
+          ⏰ ${hours} Hours
+          ${minutes} Minutes
+          ${seconds} Seconds
+
+        </p>
+
+
+        <hr style="
+          margin:20px 0;
+          border:none;
+          border-top:1px solid #ddd;
+        ">
+
+
+        <p style="margin:12px 0;">
+
+          🎉 <strong>Birthday:</strong><br>
+
+          ${formatBirthdayDate(nextBirthday)}
+
+        </p>
+
+
+        <p style="margin:12px 0;">
+
+          🗓️ <strong>Day:</strong><br>
+
+          ${birthdayDay}
+
+        </p>
+
+
+        <p style="margin:12px 0;">
+
+          🎈 <strong>You will turn:</strong><br>
+
+          ${turningAge} years old
+
+        </p>
+
+
+        <button
+          onclick="shareBirthday()"
+          style="
+            margin-top:15px;
+            background:#7c3aed;
+          "
+        >
+
+          📤 Share Countdown
+
+        </button>
+
+
+      </div>
+
+    `;
+
+
+    // Save information for sharing
+
+    window.birthdayShareText =
+      `🎂 My next birthday is on ` +
+      `${formatBirthdayDate(nextBirthday)}. ` +
+      `I will turn ${turningAge} years old! ` +
+      `Only ${totalDays} days to go! 🎉`;
+
+  }
+
+
+  // Format birthday
+
+  function formatBirthdayDate(date) {
+
+    return date.toLocaleDateString(
+      "en-IN",
+      {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      }
+    );
+
+  }
+
+
+  // Share birthday
+
+  function shareBirthday() {
+
+    if (!window.birthdayShareText) {
+      return;
+    }
+
+
+    if (navigator.share) {
+
+      navigator.share({
+
+        title: "My Birthday Countdown",
+        text: window.birthdayShareText
+
+      });
+
+    } else {
+
+      navigator.clipboard.writeText(
+        window.birthdayShareText
+      );
+
+      alert(
+        "Birthday message copied! 📋"
+      );
+
+    }
+
+  }
+
+    </script>
   <footer>
     © 2026 Find My Age · Free Age Calculator
   </footer>
