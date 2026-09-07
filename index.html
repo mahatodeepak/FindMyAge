@@ -209,6 +209,345 @@
     </div>
 
   </main>
+  <!-- EXAM AGE CALCULATOR -->
+
+<section class="container">
+
+  <div class="card">
+
+    <h2>🎯 Exam Age Calculator</h2>
+
+    <p class="subtitle">
+      Check your age on an exam's cutoff date.
+    </p>
+
+
+    <div class="form-group">
+
+      <label for="examDob">
+        🎂 Date of Birth
+      </label>
+
+      <input
+        type="date"
+        id="examDob"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label for="cutoffDate">
+        📅 Age As On / Cutoff Date
+      </label>
+
+      <input
+        type="date"
+        id="cutoffDate"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label for="maximumAge">
+        🎯 Maximum Age Allowed
+      </label>
+
+      <input
+        type="number"
+        id="maximumAge"
+        min="1"
+        max="100"
+        placeholder="Example: 30"
+        style="
+          width:100%;
+          padding:13px;
+          border:1px solid #ccc;
+          border-radius:8px;
+          font-size:16px;
+        "
+      >
+
+    </div>
+
+
+    <button onclick="checkExamAge()">
+      🔍 Check Eligibility
+    </button>
+
+
+    <div id="examResult"></div>
+
+  </div>
+
+</section>
+
+
+<!-- INFORMATION SECTION -->
+
+<section class="container">
+
+  <div class="card">
+
+    <h2>📚 Popular Exam Categories</h2>
+
+    <div class="features">
+
+      <div class="feature">
+        <span>🏫</span>
+        SSC
+      </div>
+
+      <div class="feature">
+        <span>🚆</span>
+        Railway
+      </div>
+
+      <div class="feature">
+        <span>🏛️</span>
+        UPSC
+      </div>
+
+      <div class="feature">
+        <span>🏦</span>
+        Banking
+      </div>
+
+      <div class="feature">
+        <span>📖</span>
+        WBPSC
+      </div>
+
+      <div class="feature">
+        <span>👨‍🏫</span>
+        Teaching Exams
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<script>
+
+  function checkExamAge() {
+
+    const dobValue =
+      document.getElementById("examDob").value;
+
+    const cutoffValue =
+      document.getElementById("cutoffDate").value;
+
+    const maximumAge =
+      Number(
+        document.getElementById("maximumAge").value
+      );
+
+
+    // Validation
+
+    if (!dobValue) {
+
+      alert("Please enter your date of birth.");
+
+      return;
+    }
+
+
+    if (!cutoffValue) {
+
+      alert("Please enter the cutoff date.");
+
+      return;
+    }
+
+
+    if (!maximumAge) {
+
+      alert("Please enter the maximum age.");
+
+      return;
+    }
+
+
+    const dob =
+      new Date(dobValue + "T00:00:00");
+
+    const cutoff =
+      new Date(cutoffValue + "T00:00:00");
+
+
+    if (cutoff < dob) {
+
+      alert(
+        "Cutoff date cannot be before date of birth."
+      );
+
+      return;
+    }
+
+
+    // Calculate age
+
+    let age =
+      cutoff.getFullYear() -
+      dob.getFullYear();
+
+
+    const monthDifference =
+      cutoff.getMonth() -
+      dob.getMonth();
+
+
+    const dayDifference =
+      cutoff.getDate() -
+      dob.getDate();
+
+
+    if (
+      monthDifference < 0 ||
+      (
+        monthDifference === 0 &&
+        dayDifference < 0
+      )
+    ) {
+
+      age--;
+
+    }
+
+
+    // Determine eligibility
+
+    let eligible;
+
+    if (age <= maximumAge) {
+
+      eligible = true;
+
+    } else {
+
+      eligible = false;
+
+    }
+
+
+    const result =
+      document.getElementById("examResult");
+
+
+    if (eligible) {
+
+      result.innerHTML = `
+
+        <div style="
+          margin-top:20px;
+          padding:20px;
+          background:#ecfdf5;
+          border:1px solid #86efac;
+          border-radius:12px;
+          text-align:center;
+        ">
+
+          <div style="font-size:40px;">
+            ✅
+          </div>
+
+          <h2 style="color:#15803d;">
+            You are within the age limit
+          </h2>
+
+          <p style="margin-top:10px;">
+            Your age on the cutoff date:
+          </p>
+
+          <strong style="
+            font-size:24px;
+            color:#166534;
+          ">
+            ${age} years
+          </strong>
+
+          <p style="margin-top:10px;">
+            Maximum allowed age:
+            <strong>${maximumAge} years</strong>
+          </p>
+
+          <p style="
+            margin-top:15px;
+            font-size:13px;
+            color:#666;
+          ">
+            This is an age calculation only.
+            Always check the official examination
+            notification for the actual eligibility rules.
+          </p>
+
+        </div>
+
+      `;
+
+    } else {
+
+      result.innerHTML = `
+
+        <div style="
+          margin-top:20px;
+          padding:20px;
+          background:#fef2f2;
+          border:1px solid #fca5a5;
+          border-radius:12px;
+          text-align:center;
+        ">
+
+          <div style="font-size:40px;">
+            ❌
+          </div>
+
+          <h2 style="color:#b91c1c;">
+            You exceed the selected age limit
+          </h2>
+
+          <p style="margin-top:10px;">
+            Your age on the cutoff date:
+          </p>
+
+          <strong style="
+            font-size:24px;
+            color:#991b1b;
+          ">
+            ${age} years
+          </strong>
+
+          <p style="margin-top:10px;">
+            Maximum allowed age:
+            <strong>${maximumAge} years</strong>
+          </p>
+
+          <p style="
+            margin-top:15px;
+            font-size:13px;
+            color:#666;
+          ">
+            This is only a basic age-limit calculation.
+            Some examinations provide age relaxation
+            for eligible categories.
+          </p>
+
+        </div>
+
+      `;
+
+    }
+
+  }
+
+</script>
 
   <footer>
     © 2026 Find My Age · Free Age Calculator
