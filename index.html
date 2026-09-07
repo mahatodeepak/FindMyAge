@@ -7,76 +7,74 @@
         content="width=device-width, initial-scale=1.0">
 
   <meta name="description"
-        content="Find your exact age in years, months and days with our free age calculator.">
+        content="Find My Age - Free online age calculator. Calculate your exact age in years, months and days, total days lived, next birthday and exam age eligibility.">
 
-  <title>Find My Age - Age Calculator</title>
+  <meta name="keywords"
+        content="age calculator, find my age, calculate age, exact age calculator, birthday calculator, exam age calculator">
+
+  <meta name="author"
+        content="Find My Age">
+
+  <title>Find My Age - Free Age Calculator</title>
 
   <style>
+
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
       background: #f4f7fb;
       color: #222;
     }
 
     header {
-      background: #2563eb;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
       color: white;
-      padding: 18px 15px;
       text-align: center;
+      padding: 30px 15px;
     }
 
     header h1 {
-      font-size: 28px;
-      margin-bottom: 5px;
+      margin: 0;
+      font-size: 32px;
     }
 
     header p {
-      font-size: 14px;
-      opacity: 0.95;
+      margin-top: 8px;
+      font-size: 16px;
     }
 
     .container {
-      max-width: 700px;
-      margin: 30px auto;
-      padding: 15px;
+      max-width: 900px;
+      margin: 25px auto;
+      padding: 0 15px;
     }
 
     .card {
       background: white;
-      padding: 25px;
       border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 25px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     }
 
     .card h2 {
       text-align: center;
-      margin-bottom: 10px;
-      color: #1e3a8a;
-    }
-
-    .subtitle {
-      text-align: center;
-      color: #666;
-      margin-bottom: 25px;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
+      margin-top: 0;
+      color: #4f46e5;
     }
 
     label {
       display: block;
       font-weight: bold;
-      margin-bottom: 8px;
+      margin-top: 15px;
+      margin-bottom: 7px;
     }
 
-    input[type="date"] {
+    input {
       width: 100%;
       padding: 13px;
       border: 1px solid #ccc;
@@ -85,848 +83,432 @@
     }
 
     button {
-      width: 100%;
-      padding: 14px;
       border: none;
       border-radius: 8px;
-      background: #2563eb;
-      color: white;
-      font-size: 17px;
-      font-weight: bold;
+      padding: 12px 18px;
+      font-size: 15px;
       cursor: pointer;
+      margin-top: 15px;
+      margin-right: 7px;
+      background: #4f46e5;
+      color: white;
     }
 
     button:hover {
-      background: #1d4ed8;
+      opacity: 0.9;
+    }
+
+    .reset-btn {
+      background: #777;
+    }
+
+    .share-btn {
+      background: #16a34a;
+    }
+
+    .copy-btn {
+      background: #2563eb;
+    }
+
+    .result {
+      display: none;
+      margin-top: 25px;
+      padding: 20px;
+      border-radius: 12px;
+      background: #eef2ff;
+      border-left: 5px solid #4f46e5;
+    }
+
+    .result h3 {
+      margin-top: 0;
+      color: #4f46e5;
+    }
+
+    .big-age {
+      font-size: 28px;
+      font-weight: bold;
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .info-box {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 2px 7px rgba(0,0,0,0.06);
+    }
+
+    .info-box strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 5px;
     }
 
     .features {
-      margin-top: 25px;
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 12px;
     }
 
     .feature {
-      background: #f1f5f9;
-      padding: 15px;
+      background: white;
+      padding: 18px 10px;
+      text-align: center;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+    }
+
+    .feature-icon {
+      font-size: 30px;
+    }
+
+    .feature h3 {
+      font-size: 16px;
+      margin: 8px 0;
+    }
+
+    .feature p {
+      font-size: 13px;
+      color: #666;
+    }
+
+    .exam-result {
+      display: none;
+      margin-top: 20px;
+      padding: 18px;
       border-radius: 10px;
+      background: #f0fdf4;
+      border-left: 5px solid #16a34a;
+    }
+
+    .countdown {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .count-box {
+      background: #eef2ff;
+      padding: 15px 5px;
+      border-radius: 10px;
+    }
+
+    .count-number {
+      font-size: 28px;
+      font-weight: bold;
+      color: #4f46e5;
+    }
+
+    .count-label {
+      font-size: 13px;
+      color: #555;
+    }
+
+    .privacy {
+      font-size: 13px;
+      color: #666;
+      margin-top: 15px;
       text-align: center;
     }
 
-    .feature span {
-      display: block;
-      font-size: 28px;
-      margin-bottom: 5px;
+    .disclaimer {
+      background: #fff7ed;
+      border-left: 5px solid #f97316;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #555;
+      margin-top: 15px;
     }
 
     footer {
+      background: #222;
+      color: white;
       text-align: center;
       padding: 25px 15px;
-      color: #777;
-      font-size: 13px;
+      margin-top: 30px;
     }
 
-    @media (max-width: 500px) {
-      header h1 {
-        font-size: 24px;
-      }
+    footer p {
+      margin: 5px;
+      font-size: 14px;
+    }
 
-      .card {
-        padding: 20px;
+    @media (max-width: 700px) {
+
+      header h1 {
+        font-size: 26px;
       }
 
       .features {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .info-grid {
         grid-template-columns: 1fr;
       }
+
+      .countdown-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .card {
+        padding: 18px;
+      }
+
+      button {
+        width: 100%;
+        margin-right: 0;
+      }
     }
+
   </style>
 </head>
 
 <body>
 
-  <header>
-    <h1>🎂 Find My Age</h1>
-    <p>Free & Simple Age Calculator</p>
-  </header>
+<header>
+  <h1>🎂 Find My Age</h1>
+  <p>Free & Simple Age Calculator</p>
+</header>
 
-  <main class="container">
+<div class="container">
 
-    <div class="card">
+  <!-- AGE CALCULATOR -->
 
-      <h2>Calculate Your Age</h2>
+  <div class="card">
 
-      <p class="subtitle">
-        Enter your date of birth to find your exact age.
-      </p>
+    <h2>🎂 Calculate Your Age</h2>
 
-      <div class="form-group">
-        <label for="dob">📅 Date of Birth</label>
+    <label for="dob">Date of Birth</label>
+    <input type="date" id="dob">
 
-        <input
-          type="date"
-          id="dob"
-        >
-      </div>
+    <label for="ageDate">Age As On</label>
+    <input type="date" id="ageDate">
 
-      <div class="form-group">
-        <label for="ageDate">📆 Calculate Age As On</label>
+    <button onclick="calculateAge()">Calculate My Age</button>
+    <button class="reset-btn" onclick="resetAge()">Reset</button>
 
-        <input
-          type="date"
-          id="ageDate"
-        >
-      </div>
+    <div id="ageResult" class="result">
 
-      <button onclick="calculateAge()">
-        Calculate My Age
-      </button>
+      <h3>🎉 Your Age</h3>
 
-      <div class="features">
+      <div id="bigAge" class="big-age"></div>
 
-        <div class="feature">
-          <span>🎂</span>
-          Exact Age
+      <div class="info-grid">
+
+        <div class="info-box">
+          <strong id="birthDay"></strong>
+          Day You Were Born
         </div>
 
-        <div class="feature">
-          <span>📅</span>
-          Age on Any Date
-        </div>
-
-        <div class="feature">
-          <span>🎉</span>
+        <div class="info-box">
+          <strong id="nextBirthday"></strong>
           Next Birthday
         </div>
 
-        <div class="feature">
-          <span>⏳</span>
-          Total Days
+        <div class="info-box">
+          <strong id="daysUntilBirthday"></strong>
+          Days Until Birthday
+        </div>
+
+        <div class="info-box">
+          <strong id="totalDays"></strong>
+          Total Days Lived
         </div>
 
       </div>
 
+      <p id="ageAsOnText"></p>
+
+      <button class="copy-btn" onclick="copyResult()">
+        📋 Copy Result
+      </button>
+
+      <button class="share-btn" onclick="shareResult()">
+        📤 Share Result
+      </button>
+
     </div>
 
-  </main>
-  <!-- EXAM AGE CALCULATOR -->
+    <p class="privacy">
+      🔒 Your date of birth is processed in your browser and is not sent to a server.
+    </p>
 
-<section class="container">
+  </div>
+
+
+  <!-- FEATURES -->
+
+  <div class="features">
+
+    <div class="feature">
+      <div class="feature-icon">🎯</div>
+      <h3>Exact Age</h3>
+      <p>Years, months and days</p>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">📅</div>
+      <h3>Any Date</h3>
+      <p>Calculate age on any date</p>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">🎉</div>
+      <h3>Next Birthday</h3>
+      <p>Find your next birthday</p>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">⏳</div>
+      <h3>Total Days</h3>
+      <p>See total days lived</p>
+    </div>
+
+  </div>
+
+
+  <!-- EXAM AGE CALCULATOR -->
 
   <div class="card">
 
     <h2>🎯 Exam Age Calculator</h2>
 
-    <p class="subtitle">
-      Check your age on an exam's cutoff date.
-    </p>
+    <label for="examDob">Date of Birth</label>
+    <input type="date" id="examDob">
 
+    <label for="cutoffDate">Cut-off Date</label>
+    <input type="date" id="cutoffDate">
 
-    <div class="form-group">
-
-      <label for="examDob">
-        🎂 Date of Birth
-      </label>
-
-      <input
-        type="date"
-        id="examDob"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label for="cutoffDate">
-        📅 Age As On / Cutoff Date
-      </label>
-
-      <input
-        type="date"
-        id="cutoffDate"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label for="maximumAge">
-        🎯 Maximum Age Allowed
-      </label>
-
-      <input
-        type="number"
-        id="maximumAge"
-        min="1"
-        max="100"
-        placeholder="Example: 30"
-        style="
-          width:100%;
-          padding:13px;
-          border:1px solid #ccc;
-          border-radius:8px;
-          font-size:16px;
-        "
-      >
-
-    </div>
-
+    <label for="maxAge">Maximum Age Allowed</label>
+    <input
+      type="number"
+      id="maxAge"
+      min="1"
+      placeholder="Example: 30"
+    >
 
     <button onclick="checkExamAge()">
-      🔍 Check Eligibility
+      Check Eligibility
     </button>
 
+    <div id="examResult" class="exam-result"></div>
 
-    <div id="examResult"></div>
-
-  </div>
-
-</section>
-
-
-<!-- INFORMATION SECTION -->
-
-<section class="container">
-
-  <div class="card">
-
-    <h2>📚 Popular Exam Categories</h2>
-
-    <div class="features">
-
-      <div class="feature">
-        <span>🏫</span>
-        SSC
-      </div>
-
-      <div class="feature">
-        <span>🚆</span>
-        Railway
-      </div>
-
-      <div class="feature">
-        <span>🏛️</span>
-        UPSC
-      </div>
-
-      <div class="feature">
-        <span>🏦</span>
-        Banking
-      </div>
-
-      <div class="feature">
-        <span>📖</span>
-        WBPSC
-      </div>
-
-      <div class="feature">
-        <span>👨‍🏫</span>
-        Teaching Exams
-      </div>
-
+    <div class="disclaimer">
+      ⚠️ This calculator provides a basic age-limit calculation only.
+      Actual exam eligibility may depend on the official notification,
+      category-based age relaxation, minimum/maximum age conditions and
+      other eligibility requirements.
     </div>
 
   </div>
 
-</section>
 
-
-<script>
-
-  function checkExamAge() {
-
-    const dobValue =
-      document.getElementById("examDob").value;
-
-    const cutoffValue =
-      document.getElementById("cutoffDate").value;
-
-    const maximumAge =
-      Number(
-        document.getElementById("maximumAge").value
-      );
-
-
-    // Validation
-
-    if (!dobValue) {
-
-      alert("Please enter your date of birth.");
-
-      return;
-    }
-
-
-    if (!cutoffValue) {
-
-      alert("Please enter the cutoff date.");
-
-      return;
-    }
-
-
-    if (!maximumAge) {
-
-      alert("Please enter the maximum age.");
-
-      return;
-    }
-
-
-    const dob =
-      new Date(dobValue + "T00:00:00");
-
-    const cutoff =
-      new Date(cutoffValue + "T00:00:00");
-
-
-    if (cutoff < dob) {
-
-      alert(
-        "Cutoff date cannot be before date of birth."
-      );
-
-      return;
-    }
-
-
-    // Calculate age
-
-    let age =
-      cutoff.getFullYear() -
-      dob.getFullYear();
-
-
-    const monthDifference =
-      cutoff.getMonth() -
-      dob.getMonth();
-
-
-    const dayDifference =
-      cutoff.getDate() -
-      dob.getDate();
-
-
-    if (
-      monthDifference < 0 ||
-      (
-        monthDifference === 0 &&
-        dayDifference < 0
-      )
-    ) {
-
-      age--;
-
-    }
-
-
-    // Determine eligibility
-
-    let eligible;
-
-    if (age <= maximumAge) {
-
-      eligible = true;
-
-    } else {
-
-      eligible = false;
-
-    }
-
-
-    const result =
-      document.getElementById("examResult");
-
-
-    if (eligible) {
-
-      result.innerHTML = `
-
-        <div style="
-          margin-top:20px;
-          padding:20px;
-          background:#ecfdf5;
-          border:1px solid #86efac;
-          border-radius:12px;
-          text-align:center;
-        ">
-
-          <div style="font-size:40px;">
-            ✅
-          </div>
-
-          <h2 style="color:#15803d;">
-            You are within the age limit
-          </h2>
-
-          <p style="margin-top:10px;">
-            Your age on the cutoff date:
-          </p>
-
-          <strong style="
-            font-size:24px;
-            color:#166534;
-          ">
-            ${age} years
-          </strong>
-
-          <p style="margin-top:10px;">
-            Maximum allowed age:
-            <strong>${maximumAge} years</strong>
-          </p>
-
-          <p style="
-            margin-top:15px;
-            font-size:13px;
-            color:#666;
-          ">
-            This is an age calculation only.
-            Always check the official examination
-            notification for the actual eligibility rules.
-          </p>
-
-        </div>
-
-      `;
-
-    } else {
-
-      result.innerHTML = `
-
-        <div style="
-          margin-top:20px;
-          padding:20px;
-          background:#fef2f2;
-          border:1px solid #fca5a5;
-          border-radius:12px;
-          text-align:center;
-        ">
-
-          <div style="font-size:40px;">
-            ❌
-          </div>
-
-          <h2 style="color:#b91c1c;">
-            You exceed the selected age limit
-          </h2>
-
-          <p style="margin-top:10px;">
-            Your age on the cutoff date:
-          </p>
-
-          <strong style="
-            font-size:24px;
-            color:#991b1b;
-          ">
-            ${age} years
-          </strong>
-
-          <p style="margin-top:10px;">
-            Maximum allowed age:
-            <strong>${maximumAge} years</strong>
-          </p>
-
-          <p style="
-            margin-top:15px;
-            font-size:13px;
-            color:#666;
-          ">
-            This is only a basic age-limit calculation.
-            Some examinations provide age relaxation
-            for eligible categories.
-          </p>
-
-        </div>
-
-      `;
-
-    }
-
-  }
-
-</script>
   <!-- BIRTHDAY COUNTDOWN -->
 
-<section class="container">
-
   <div class="card">
 
-    <h2>🎂 Birthday Countdown</h2>
+    <h2>🎈 Birthday Countdown</h2>
 
-    <p class="subtitle">
-      Find out how many days are left until your next birthday.
-    </p>
+    <label for="birthdayDob">
+      Date of Birth
+    </label>
 
-    <div class="form-group">
-
-      <label for="birthdayDob">
-        🎂 Your Date of Birth
-      </label>
-
-      <input
-        type="date"
-        id="birthdayDob"
-      >
-
-    </div>
+    <input type="date" id="birthdayDob">
 
     <button onclick="birthdayCountdown()">
       🎉 Start Countdown
     </button>
 
-    <div id="birthdayResult"></div>
+    <button class="reset-btn" onclick="resetBirthday()">
+      Reset
+    </button>
 
-  </div>
+    <div id="birthdayCountdownBox" class="countdown">
 
-</section>
+      <h3 id="birthdayTitle"></h3>
 
+      <div class="countdown-grid">
 
-<script>
-
-  function birthdayCountdown() {
-
-    const dobValue =
-      document.getElementById("birthdayDob").value;
-
-
-    if (!dobValue) {
-
-      alert("Please enter your date of birth.");
-
-      return;
-    }
-
-
-    const dob =
-      new Date(dobValue + "T00:00:00");
-
-
-    const now =
-      new Date();
-
-
-    // Check future DOB
-
-    if (dob > now) {
-
-      alert(
-        "Date of birth cannot be in the future."
-      );
-
-      return;
-    }
-
-
-    // Current year
-
-    let nextBirthday =
-      new Date(
-        now.getFullYear(),
-        dob.getMonth(),
-        dob.getDate()
-      );
-
-
-    // If birthday has already passed
-
-    if (nextBirthday < now) {
-
-      nextBirthday =
-        new Date(
-          now.getFullYear() + 1,
-          dob.getMonth(),
-          dob.getDate()
-        );
-
-    }
-
-
-    // Special case: February 29
-
-    if (
-      dob.getMonth() === 1 &&
-      dob.getDate() === 29
-    ) {
-
-      const year =
-        nextBirthday.getFullYear();
-
-
-      const isLeapYear =
-        (
-          year % 4 === 0 &&
-          year % 100 !== 0
-        ) ||
-        year % 400 === 0;
-
-
-      if (!isLeapYear) {
-
-        nextBirthday =
-          new Date(
-            year,
-            1,
-            28
-          );
-
-      }
-
-    }
-
-
-    // Calculate difference
-
-    const difference =
-      nextBirthday.getTime() -
-      now.getTime();
-
-
-    const totalSeconds =
-      Math.floor(
-        difference / 1000
-      );
-
-
-    const totalMinutes =
-      Math.floor(
-        totalSeconds / 60
-      );
-
-
-    const totalHours =
-      Math.floor(
-        totalMinutes / 60
-      );
-
-
-    const totalDays =
-      Math.floor(
-        totalHours / 24
-      );
-
-
-    const hours =
-      totalHours % 24;
-
-
-    const minutes =
-      totalMinutes % 60;
-
-
-    const seconds =
-      totalSeconds % 60;
-
-
-    // Next birthday weekday
-
-    const dayNames = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday"
-    ];
-
-
-    const birthdayDay =
-      dayNames[nextBirthday.getDay()];
-
-
-    // Calculate age turning
-
-    let turningAge =
-      nextBirthday.getFullYear() -
-      dob.getFullYear();
-
-
-    // Result
-
-    document.getElementById(
-      "birthdayResult"
-    ).innerHTML = `
-
-      <div style="
-        margin-top:25px;
-        padding:25px;
-        background:white;
-        border-radius:16px;
-        text-align:center;
-        border:1px solid #ddd;
-        box-shadow:0 6px 20px rgba(0,0,0,0.08);
-      ">
-
-        <div style="
-          font-size:55px;
-          margin-bottom:10px;
-        ">
-          🎂
+        <div class="count-box">
+          <div id="cdDays" class="count-number">0</div>
+          <div class="count-label">Days</div>
         </div>
 
-
-        <h2 style="
-          color:#7c3aed;
-          margin-bottom:15px;
-        ">
-          Your Next Birthday
-        </h2>
-
-
-        <div style="
-          font-size:32px;
-          font-weight:bold;
-          color:#2563eb;
-          margin:15px 0;
-        ">
-
-          ${totalDays} Days
-
+        <div class="count-box">
+          <div id="cdHours" class="count-number">0</div>
+          <div class="count-label">Hours</div>
         </div>
 
+        <div class="count-box">
+          <div id="cdMinutes" class="count-number">0</div>
+          <div class="count-label">Minutes</div>
+        </div>
 
-        <p style="
-          font-size:18px;
-          margin:10px 0;
-        ">
-
-          ⏰ ${hours} Hours
-          ${minutes} Minutes
-          ${seconds} Seconds
-
-        </p>
-
-
-        <hr style="
-          margin:20px 0;
-          border:none;
-          border-top:1px solid #ddd;
-        ">
-
-
-        <p style="margin:12px 0;">
-
-          🎉 <strong>Birthday:</strong><br>
-
-          ${formatBirthdayDate(nextBirthday)}
-
-        </p>
-
-
-        <p style="margin:12px 0;">
-
-          🗓️ <strong>Day:</strong><br>
-
-          ${birthdayDay}
-
-        </p>
-
-
-        <p style="margin:12px 0;">
-
-          🎈 <strong>You will turn:</strong><br>
-
-          ${turningAge} years old
-
-        </p>
-
-
-        <button
-          onclick="shareBirthday()"
-          style="
-            margin-top:15px;
-            background:#7c3aed;
-          "
-        >
-
-          📤 Share Countdown
-
-        </button>
-
+        <div class="count-box">
+          <div id="cdSeconds" class="count-number">0</div>
+          <div class="count-label">Seconds</div>
+        </div>
 
       </div>
 
-    `;
+      <p id="birthdayDateText"></p>
+      <p id="birthdayWeekday"></p>
+
+      <button class="share-btn" onclick="shareBirthday()">
+        📤 Share Countdown
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
 
 
-    // Save information for sharing
+<footer>
 
-    window.birthdayShareText =
-      `🎂 My next birthday is on ` +
-      `${formatBirthdayDate(nextBirthday)}. ` +
-      `I will turn ${turningAge} years old! ` +
-      `Only ${totalDays} days to go! 🎉`;
+  <p>🎂 Find My Age</p>
 
-  }
+  <p>
+    Free Online Age Calculator
+  </p>
 
+  <p>
+    © 2026 Find My Age
+  </p>
 
-  // Format birthday
+</footer>
 
-  function formatBirthdayDate(date) {
-
-    return date.toLocaleDateString(
-      "en-IN",
-      {
-        day: "numeric",
-        month: "long",
-        year: "numeric"
-      }
-    );
-
-  }
-
-
-  // Share birthday
-
-  function shareBirthday() {
-
-    if (!window.birthdayShareText) {
-      return;
-    }
-
-
-    if (navigator.share) {
-
-      navigator.share({
-
-        title: "My Birthday Countdown",
-        text: window.birthdayShareText
-
-      });
-
-    } else {
-
-      navigator.clipboard.writeText(
-        window.birthdayShareText
-      );
-
-      alert(
-        "Birthday message copied! 📋"
-      );
-
-    }
-
-  }
-
-    </script>
-  <footer>
-    © 2026 Find My Age · Free Age Calculator
-  </footer>
 
 <script>
 
-  // Today's date
+  /* =====================================
+     MAIN AGE CALCULATOR
+  ===================================== */
+
+  let currentAgeResult = "";
+
   const today = new Date();
 
-  const yyyy = today.getFullYear();
-  const mm = String(today.getMonth() + 1).padStart(2, "0");
-  const dd = String(today.getDate()).padStart(2, "0");
-
   document.getElementById("ageDate").value =
-    `${yyyy}-${mm}-${dd}`;
+    today.toISOString().split("T")[0];
 
 
   function calculateAge() {
@@ -937,54 +519,47 @@
     const ageDateValue =
       document.getElementById("ageDate").value;
 
+    if (!dobValue || !ageDateValue) {
 
-    if (!dobValue) {
-      alert("Please enter your date of birth.");
+      alert("Please enter both dates.");
+
       return;
     }
 
-    if (!ageDateValue) {
-      alert("Please select the calculation date.");
-      return;
-    }
-
-
-    const dob =
-      new Date(dobValue + "T00:00:00");
+    const dob = new Date(dobValue + "T00:00:00");
 
     const ageDate =
       new Date(ageDateValue + "T00:00:00");
 
+    const todayDate = new Date();
 
-    if (dob > today) {
+    todayDate.setHours(0, 0, 0, 0);
+
+
+    if (dob > todayDate) {
+
       alert("Date of birth cannot be in the future.");
+
       return;
     }
 
 
     if (ageDate < dob) {
-      alert(
-        "The calculation date cannot be before your date of birth."
-      );
+
+      alert("Age As On date cannot be before Date of Birth.");
+
       return;
     }
 
 
-    // -----------------------------
-    // EXACT AGE
-    // -----------------------------
-
     let years =
-      ageDate.getFullYear() -
-      dob.getFullYear();
+      ageDate.getFullYear() - dob.getFullYear();
 
     let months =
-      ageDate.getMonth() -
-      dob.getMonth();
+      ageDate.getMonth() - dob.getMonth();
 
     let days =
-      ageDate.getDate() -
-      dob.getDate();
+      ageDate.getDate() - dob.getDate();
 
 
     if (days < 0) {
@@ -1005,32 +580,23 @@
     if (months < 0) {
 
       years--;
-
       months += 12;
     }
 
 
-    // -----------------------------
-    // DAY OF BIRTH
-    // -----------------------------
+    const totalDays =
+      Math.floor(
+        (ageDate - dob) /
+        (1000 * 60 * 60 * 24)
+      );
 
-    const dayNames = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday"
-    ];
 
     const birthDay =
-      dayNames[dob.getDay()];
+      dob.toLocaleDateString(
+        "en-IN",
+        { weekday: "long" }
+      );
 
-
-    // -----------------------------
-    // NEXT BIRTHDAY
-    // -----------------------------
 
     let nextBirthday =
       new Date(
@@ -1048,274 +614,181 @@
           dob.getMonth(),
           dob.getDate()
         );
-
     }
 
 
-    // Leap year birthday
+    /* Handle February 29 */
+
     if (
       dob.getMonth() === 1 &&
-      dob.getDate() === 29 &&
-      nextBirthday.getMonth() !== 1
+      dob.getDate() === 29
     ) {
 
-      nextBirthday =
-        new Date(
-          nextBirthday.getFullYear(),
-          1,
-          28
-        );
+      const year =
+        nextBirthday.getFullYear();
 
+      if (
+        !(
+          year % 4 === 0 &&
+          (
+            year % 100 !== 0 ||
+            year % 400 === 0
+          )
+        )
+      ) {
+
+        nextBirthday =
+          new Date(
+            year,
+            1,
+            28
+          );
+      }
     }
 
-
-    // -----------------------------
-    // DAYS UNTIL BIRTHDAY
-    // -----------------------------
-
-    const millisecondsPerDay =
-      1000 * 60 * 60 * 24;
 
     const daysUntilBirthday =
       Math.ceil(
-        (nextBirthday - ageDate) /
-        millisecondsPerDay
+        (
+          nextBirthday -
+          ageDate
+        ) /
+        (1000 * 60 * 60 * 24)
       );
 
 
-    // -----------------------------
-    // TOTAL DAYS
-    // -----------------------------
-
-    const totalDays =
-      Math.floor(
-        (ageDate - dob) /
-        millisecondsPerDay
+    const formattedBirthday =
+      nextBirthday.toLocaleDateString(
+        "en-IN",
+        {
+          day: "numeric",
+          month: "long",
+          year: "numeric"
+        }
       );
 
 
-    // -----------------------------
-    // RESULT TEXT
-    // -----------------------------
-
-    const resultText =
-      `My age is ${years} years, ` +
-      `${months} months and ${days} days. ` +
-      `Born on ${formatDate(dob)} (${birthDay}). ` +
-      `Next birthday: ${formatDate(nextBirthday)}. ` +
-      `${daysUntilBirthday} days remaining.`;
-
-
-    // -----------------------------
-    // REMOVE OLD RESULT
-    // -----------------------------
-
-    const oldResult =
-      document.getElementById("ageResult");
-
-    if (oldResult) {
-      oldResult.remove();
-    }
+    const formattedAgeDate =
+      ageDate.toLocaleDateString(
+        "en-IN",
+        {
+          day: "numeric",
+          month: "long",
+          year: "numeric"
+        }
+      );
 
 
-    // -----------------------------
-    // RESULT CARD
-    // -----------------------------
-
-    const resultHTML = `
-
-      <div id="ageResult"
-           style="
-             margin-top:25px;
-             padding:25px;
-             background:white;
-             border-radius:16px;
-             text-align:center;
-             border:1px solid #dbeafe;
-             box-shadow:0 6px 20px rgba(0,0,0,0.08);
-           ">
-
-        <div style="
-          font-size:45px;
-          margin-bottom:5px;
-        ">
-          🎂
-        </div>
+    document.getElementById("bigAge").textContent =
+      years +
+      " Years, " +
+      months +
+      " Months, " +
+      days +
+      " Days";
 
 
-        <h2 style="
-          color:#1e3a8a;
-          margin-bottom:10px;
-        ">
-          Your Exact Age
-        </h2>
+    document.getElementById("birthDay").textContent =
+      birthDay;
 
 
-        <div style="
-          font-size:30px;
-          font-weight:bold;
-          margin:18px 0;
-          color:#2563eb;
-          line-height:1.4;
-        ">
-
-          ${years} Years<br>
-          ${months} Months<br>
-          ${days} Days
-
-        </div>
+    document.getElementById("nextBirthday").textContent =
+      formattedBirthday;
 
 
-        <div style="
-          background:#f8fafc;
-          padding:15px;
-          border-radius:10px;
-          margin-top:20px;
-          text-align:left;
-        ">
-
-          <p style="margin:10px 0;">
-            📅 <strong>Date of Birth:</strong><br>
-            ${formatDate(dob)}
-          </p>
+    document.getElementById("daysUntilBirthday").textContent =
+      daysUntilBirthday;
 
 
-          <p style="margin:10px 0;">
-            🗓️ <strong>Day of Birth:</strong><br>
-            ${birthDay}
-          </p>
+    document.getElementById("totalDays").textContent =
+      totalDays.toLocaleString("en-IN");
 
 
-          <p style="margin:10px 0;">
-            🎉 <strong>Next Birthday:</strong><br>
-            ${formatDate(nextBirthday)}
-          </p>
+    document.getElementById("ageAsOnText").textContent =
+      "Your age as on " +
+      formattedAgeDate +
+      " is " +
+      years +
+      " years, " +
+      months +
+      " months and " +
+      days +
+      " days.";
 
 
-          <p style="margin:10px 0;">
-            ⏳ <strong>Days Until Birthday:</strong><br>
-            ${daysUntilBirthday} days
-          </p>
+    currentAgeResult =
+      "My Age Result\n\n" +
+      "Age: " +
+      years +
+      " years, " +
+      months +
+      " months, " +
+      days +
+      " days\n" +
+      "Born: " +
+      birthDay +
+      "\n" +
+      "Next Birthday: " +
+      formattedBirthday +
+      "\n" +
+      "Days Until Birthday: " +
+      daysUntilBirthday +
+      "\n" +
+      "Total Days Lived: " +
+      totalDays.toLocaleString("en-IN");
 
 
-          <p style="margin:10px 0;">
-            📊 <strong>Total Days Lived:</strong><br>
-            ${totalDays.toLocaleString("en-IN")} days
-          </p>
-
-
-          <p style="margin:10px 0;">
-            📆 <strong>Age As On:</strong><br>
-            ${formatDate(ageDate)}
-          </p>
-
-        </div>
-
-
-        <!-- ACTION BUTTONS -->
-
-        <div style="
-          display:grid;
-          grid-template-columns:1fr 1fr;
-          gap:10px;
-          margin-top:20px;
-        ">
-
-          <button
-            onclick="copyResult()"
-            style="
-              background:#16a34a;
-            ">
-            📋 Copy
-          </button>
-
-
-          <button
-            onclick="shareResult()"
-            style="
-              background:#7c3aed;
-            ">
-            📤 Share
-          </button>
-
-        </div>
-
-
-        <button
-          onclick="resetCalculator()"
-          style="
-            margin-top:10px;
-            background:#64748b;
-          ">
-          🔄 Calculate Again
-        </button>
-
-
-        <p style="
-          margin-top:18px;
-          font-size:12px;
-          color:#777;
-        ">
-          🔒 Your date of birth is calculated
-          locally on your device.
-        </p>
-
-      </div>
-
-    `;
-
-
-    const button =
-      document.querySelector(".card button");
-
-    button.insertAdjacentHTML(
-      "afterend",
-      resultHTML
-    );
-
-
-    // Save result for Copy / Share
-    window.currentAgeResult =
-      resultText;
-
+    document.getElementById("ageResult").style.display =
+      "block";
   }
 
 
-  // -----------------------------
-  // COPY RESULT
-  // -----------------------------
+  function resetAge() {
+
+    document.getElementById("dob").value = "";
+
+    document.getElementById("ageDate").value =
+      new Date().toISOString().split("T")[0];
+
+    document.getElementById("ageResult").style.display =
+      "none";
+
+    currentAgeResult = "";
+  }
+
 
   function copyResult() {
 
-    if (!window.currentAgeResult) {
+    if (!currentAgeResult) {
+
+      alert("Please calculate your age first.");
+
       return;
     }
 
 
     navigator.clipboard.writeText(
-      window.currentAgeResult
+      currentAgeResult
     )
-    .then(() => {
+    .then(function() {
 
-      alert("Age result copied! 📋");
+      alert("Age result copied!");
 
     })
-    .catch(() => {
+    .catch(function() {
 
-      alert("Unable to copy the result.");
+      alert("Unable to copy result.");
 
     });
-
   }
 
 
-  // -----------------------------
-  // SHARE RESULT
-  // -----------------------------
-
   function shareResult() {
 
-    if (!window.currentAgeResult) {
+    if (!currentAgeResult) {
+
+      alert("Please calculate your age first.");
+
       return;
     }
 
@@ -1324,8 +797,9 @@
 
       navigator.share({
 
-        title: "My Age",
-        text: window.currentAgeResult
+        title: "My Age Result",
+
+        text: currentAgeResult
 
       });
 
@@ -1334,45 +808,356 @@
       copyResult();
 
       alert(
-        "Sharing is not supported on this browser. " +
-        "The result has been copied instead."
+        "Sharing is not supported on this browser. Result copied instead."
       );
 
     }
-
   }
 
 
-  // -----------------------------
-  // RESET
-  // -----------------------------
 
-  function resetCalculator() {
+  /* =====================================
+     EXAM AGE CALCULATOR
+  ===================================== */
 
-    document.getElementById("dob").value = "";
+  function checkExamAge() {
 
-    document.getElementById("ageDate").value =
-      `${yyyy}-${mm}-${dd}`;
+    const dobValue =
+      document.getElementById("examDob").value;
+
+    const cutoffValue =
+      document.getElementById("cutoffDate").value;
+
+    const maxAge =
+      Number(
+        document.getElementById("maxAge").value
+      );
 
 
-    const result =
-      document.getElementById("ageResult");
+    if (
+      !dobValue ||
+      !cutoffValue ||
+      !maxAge
+    ) {
 
-    if (result) {
-      result.remove();
+      alert(
+        "Please enter Date of Birth, Cut-off Date and Maximum Age."
+      );
+
+      return;
     }
 
 
-    window.currentAgeResult = "";
+    const dob =
+      new Date(dobValue + "T00:00:00");
 
+    const cutoff =
+      new Date(cutoffValue + "T00:00:00");
+
+
+    if (cutoff < dob) {
+
+      alert(
+        "Cut-off date cannot be before Date of Birth."
+      );
+
+      return;
+    }
+
+
+    let years =
+      cutoff.getFullYear() -
+      dob.getFullYear();
+
+
+    const monthDifference =
+      cutoff.getMonth() -
+      dob.getMonth();
+
+
+    if (
+      monthDifference < 0 ||
+      (
+        monthDifference === 0 &&
+        cutoff.getDate() < dob.getDate()
+      )
+    ) {
+
+      years--;
+    }
+
+
+    const result =
+      document.getElementById("examResult");
+
+
+    result.style.display = "block";
+
+
+    if (years <= maxAge) {
+
+      result.style.background =
+        "#f0fdf4";
+
+      result.style.borderLeftColor =
+        "#16a34a";
+
+      result.innerHTML =
+        "✅ <strong>Within the selected age limit.</strong><br><br>" +
+        "Age on cut-off date: " +
+        years +
+        " years.<br>" +
+        "Maximum allowed age: " +
+        maxAge +
+        " years.";
+
+    } else {
+
+      result.style.background =
+        "#fef2f2";
+
+      result.style.borderLeftColor =
+        "#dc2626";
+
+      result.innerHTML =
+        "❌ <strong>Exceeds the selected age limit.</strong><br><br>" +
+        "Age on cut-off date: " +
+        years +
+        " years.<br>" +
+        "Maximum allowed age: " +
+        maxAge +
+        " years.";
+    }
   }
 
 
-  // -----------------------------
-  // DATE FORMAT
-  // -----------------------------
 
-  function formatDate(date) {
+  /* =====================================
+     LIVE BIRTHDAY COUNTDOWN
+  ===================================== */
+
+  let birthdayTimer = null;
+
+  let birthdayShareText = "";
+
+
+  function birthdayCountdown() {
+
+    const dobValue =
+      document.getElementById("birthdayDob").value;
+
+
+    if (!dobValue) {
+
+      alert("Please enter your date of birth.");
+
+      return;
+    }
+
+
+    if (birthdayTimer) {
+
+      clearInterval(birthdayTimer);
+    }
+
+
+    updateBirthdayCountdown(dobValue);
+
+
+    birthdayTimer =
+      setInterval(
+        function() {
+
+          updateBirthdayCountdown(dobValue);
+
+        },
+        1000
+      );
+  }
+
+
+  function updateBirthdayCountdown(dobValue) {
+
+    const dob =
+      new Date(dobValue + "T00:00:00");
+
+
+    const now =
+      new Date();
+
+
+    let birthday =
+      new Date(
+        now.getFullYear(),
+        dob.getMonth(),
+        dob.getDate(),
+        0,
+        0,
+        0
+      );
+
+
+    let ageTurning =
+      now.getFullYear() -
+      dob.getFullYear();
+
+
+    if (birthday <= now) {
+
+      birthday =
+        new Date(
+          now.getFullYear() + 1,
+          dob.getMonth(),
+          dob.getDate(),
+          0,
+          0,
+          0
+        );
+
+      ageTurning++;
+    }
+
+
+    /* Handle February 29 */
+
+    if (
+      dob.getMonth() === 1 &&
+      dob.getDate() === 29
+    ) {
+
+      const year =
+        birthday.getFullYear();
+
+      const isLeapYear =
+        year % 4 === 0 &&
+        (
+          year % 100 !== 0 ||
+          year % 400 === 0
+        );
+
+
+      if (!isLeapYear) {
+
+        birthday =
+          new Date(
+            year,
+            1,
+            28,
+            0,
+            0,
+            0
+          );
+      }
+    }
+
+
+    const difference =
+      birthday - now;
+
+
+    if (difference <= 0) {
+
+      return;
+    }
+
+
+    const days =
+      Math.floor(
+        difference /
+        (1000 * 60 * 60 * 24)
+      );
+
+
+    const hours =
+      Math.floor(
+        (
+          difference %
+          (1000 * 60 * 60 * 24)
+        ) /
+        (1000 * 60 * 60)
+      );
+
+
+    const minutes =
+      Math.floor(
+        (
+          difference %
+          (1000 * 60 * 60)
+        ) /
+        (1000 * 60)
+      );
+
+
+    const seconds =
+      Math.floor(
+        (
+          difference %
+          (1000 * 60)
+        ) /
+        1000
+      );
+
+
+    document.getElementById("cdDays").textContent =
+      days;
+
+
+    document.getElementById("cdHours").textContent =
+      hours;
+
+
+    document.getElementById("cdMinutes").textContent =
+      minutes;
+
+
+    document.getElementById("cdSeconds").textContent =
+      seconds;
+
+
+    document.getElementById("birthdayTitle").textContent =
+      "🎉 You will turn " +
+      ageTurning +
+      " years old!";
+
+
+    document.getElementById("birthdayDateText").textContent =
+      "Next Birthday: " +
+      formatBirthdayDate(birthday);
+
+
+    document.getElementById("birthdayWeekday").textContent =
+      "Birthday falls on: " +
+      birthday.toLocaleDateString(
+        "en-IN",
+        { weekday: "long" }
+      );
+
+
+    birthdayShareText =
+      "🎂 My Birthday Countdown\n\n" +
+      "I will turn " +
+      ageTurning +
+      " years old on " +
+      formatBirthdayDate(birthday) +
+      ".\n\n" +
+      days +
+      " days, " +
+      hours +
+      " hours, " +
+      minutes +
+      " minutes, " +
+      seconds +
+      " seconds remaining!\n\n" +
+      "Calculate your age at Find My Age.";
+
+
+    document.getElementById(
+      "birthdayCountdownBox"
+    ).style.display = "block";
+  }
+
+
+  function formatBirthdayDate(date) {
 
     return date.toLocaleDateString(
       "en-IN",
@@ -1382,17 +1167,71 @@
         year: "numeric"
       }
     );
+  }
 
+
+  function shareBirthday() {
+
+    if (!birthdayShareText) {
+
+      alert(
+        "Please start the birthday countdown first."
+      );
+
+      return;
+    }
+
+
+    if (navigator.share) {
+
+      navigator.share({
+
+        title: "Birthday Countdown",
+
+        text: birthdayShareText
+
+      });
+
+    } else {
+
+      navigator.clipboard.writeText(
+        birthdayShareText
+      )
+      .then(function() {
+
+        alert(
+          "Countdown copied. You can paste it anywhere."
+        );
+
+      });
+    }
+  }
+
+
+  function resetBirthday() {
+
+    if (birthdayTimer) {
+
+      clearInterval(birthdayTimer);
+
+      birthdayTimer = null;
+    }
+
+
+    document.getElementById(
+      "birthdayDob"
+    ).value = "";
+
+
+    document.getElementById(
+      "birthdayCountdownBox"
+    ).style.display = "none";
+
+
+    birthdayShareText = "";
   }
 
 </script>
-
-    
-    
-
-        <p style="margin:12px 0;">
-        
-    
 
 </body>
 </html>
