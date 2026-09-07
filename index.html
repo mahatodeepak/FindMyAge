@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <meta name="description"
+        content="Find your exact age in years, months and days with our free age calculator.">
+
+  <title>Find My Age - Age Calculator</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      padding: 18px 15px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 28px;
+      margin-bottom: 5px;
+    }
+
+    header p {
+      font-size: 14px;
+      opacity: 0.95;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 15px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .card h2 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #1e3a8a;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    input[type="date"] {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .features {
+      margin-top: 25px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .feature {
+      background: #f1f5f9;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .feature span {
+      display: block;
+      font-size: 28px;
+      margin-bottom: 5px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 15px;
+      color: #777;
+      font-size: 13px;
+    }
+
+    @media (max-width: 500px) {
+      header h1 {
+        font-size: 24px;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>🎂 Find My Age</h1>
+    <p>Free & Simple Age Calculator</p>
+  </header>
+
+  <main class="container">
+
+    <div class="card">
+
+      <h2>Calculate Your Age</h2>
+
+      <p class="subtitle">
+        Enter your date of birth to find your exact age.
+      </p>
+
+      <div class="form-group">
+        <label for="dob">📅 Date of Birth</label>
+
+        <input
+          type="date"
+          id="dob"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="ageDate">📆 Calculate Age As On</label>
+
+        <input
+          type="date"
+          id="ageDate"
+        >
+      </div>
+
+      <button onclick="calculateAge()">
+        Calculate My Age
+      </button>
+
+      <div class="features">
+
+        <div class="feature">
+          <span>🎂</span>
+          Exact Age
+        </div>
+
+        <div class="feature">
+          <span>📅</span>
+          Age on Any Date
+        </div>
+
+        <div class="feature">
+          <span>🎉</span>
+          Next Birthday
+        </div>
+
+        <div class="feature">
+          <span>⏳</span>
+          Total Days
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer>
+    © 2026 Find My Age · Free Age Calculator
+  </footer>
+
+  <script>
+
+    // Set today's date automatically
+    const today = new Date();
+
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const dd = String(today.getDate()).padStart(2, "0");
+
+    document.getElementById("ageDate").value =
+      `${yyyy}-${mm}-${dd}`;
+
+
+    function calculateAge() {
+
+      const dob =
+        document.getElementById("dob").value;
+
+      const ageDate =
+        document.getElementById("ageDate").value;
+
+      if (!dob) {
+        alert("Please enter your date of birth.");
+        return;
+      }
+
+      if (!ageDate) {
+        alert("Please select the date.");
+        return;
+      }
+
+      alert("Age calculation will be added in Step 2.");
+
+    }
+
+  </script>
+
+</body>
+</html>
