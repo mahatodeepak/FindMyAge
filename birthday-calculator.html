@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <meta name="description"
+        content="Free Birthday Calculator. Find your next birthday, birthday countdown, birthday weekday and age you will turn.">
+
+  <meta name="keywords"
+        content="birthday calculator, birthday countdown, next birthday, days until birthday, birthday age calculator">
+
+  <meta name="author"
+        content="Find My Age">
+
+  <title>Birthday Calculator - Next Birthday Countdown</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: linear-gradient(135deg, #ec4899, #8b5cf6);
+      color: white;
+      text-align: center;
+      padding: 30px 15px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 30px;
+    }
+
+    header p {
+      margin-top: 8px;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 25px auto;
+      padding: 0 15px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      color: #8b5cf6;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 15px;
+      margin-bottom: 7px;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 13px;
+      margin-top: 18px;
+      border: none;
+      border-radius: 8px;
+      background: #8b5cf6;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .countdown {
+      display: none;
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .count-box {
+      background: #f5f3ff;
+      padding: 18px 5px;
+      border-radius: 10px;
+    }
+
+    .count-number {
+      font-size: 30px;
+      font-weight: bold;
+      color: #8b5cf6;
+    }
+
+    .count-label {
+      font-size: 13px;
+      color: #555;
+    }
+
+    .share-btn {
+      background: #16a34a;
+    }
+
+    .reset-btn {
+      background: #777;
+    }
+
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 25px;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 600px) {
+
+      .countdown-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .card {
+        padding: 18px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<header>
+
+  <h1>🎈 Birthday Calculator</h1>
+
+  <p>
+    Find Your Next Birthday & Live Countdown
+  </p>
+
+</header>
+
+
+<div class="container">
+
+
+  <!-- BIRTHDAY CALCULATOR -->
+
+  <div class="card">
+
+    <h2>🎂 Birthday Countdown</h2>
+
+    <label for="dob">
+      Date of Birth
+    </label>
+
+    <input
+      type="date"
+      id="dob"
+    >
+
+    <button onclick="startCountdown()">
+      🎉 Start Birthday Countdown
+    </button>
+
+    <button
+      class="reset-btn"
+      onclick="resetCountdown()"
+    >
+      Reset
+    </button>
+
+
+    <div
+      id="countdown"
+      class="countdown"
+    >
+
+      <h2 id="birthdayTitle"></h2>
+
+      <div class="countdown-grid">
+
+        <div class="count-box">
+
+          <div
+            id="days"
+            class="count-number"
+          >
+            0
+          </div>
+
+          <div class="count-label">
+            Days
+          </div>
+
+        </div>
+
+
+        <div class="count-box">
+
+          <div
+            id="hours"
+            class="count-number"
+          >
+            0
+          </div>
+
+          <div class="count-label">
+            Hours
+          </div>
+
+        </div>
+
+
+        <div class="count-box">
+
+          <div
+            id="minutes"
+            class="count-number"
+          >
+            0
+          </div>
+
+          <div class="count-label">
+            Minutes
+          </div>
+
+        </div>
+
+
+        <div class="count-box">
+
+          <div
+            id="seconds"
+            class="count-number"
+          >
+            0
+          </div>
+
+          <div class="count-label">
+            Seconds
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <p id="birthdayDate"></p>
+
+      <p id="birthdayDay"></p>
+
+      <button
+        class="share-btn"
+        onclick="shareBirthday()"
+      >
+        📤 Share Birthday Countdown
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- INFORMATION -->
+
+  <div class="card">
+
+    <h2>
+      What is a Birthday Calculator?
+    </h2>
+
+    <p>
+      A birthday calculator helps you find your next birthday
+      and calculate how much time remains until your birthday.
+      Enter your date of birth to see a live countdown.
+    </p>
+
+    <h2>
+      How Does the Birthday Countdown Work?
+    </h2>
+
+    <p>
+      Enter your date of birth and click the Start Birthday
+      Countdown button. The calculator automatically finds
+      your next birthday and displays the remaining days,
+      hours, minutes and seconds.
+    </p>
+
+    <h2>
+      Frequently Asked Questions
+    </h2>
+
+    <h3>
+      How many days until my birthday?
+    </h3>
+
+    <p>
+      Enter your date of birth above. The live countdown will
+      show the remaining time until your next birthday.
+    </p>
+
+    <h3>
+      What day will my birthday fall on?
+    </h3>
+
+    <p>
+      The calculator displays the weekday of your next birthday.
+    </p>
+
+    <h3>
+      Can I use this birthday calculator on my phone?
+    </h3>
+
+    <p>
+      Yes. The calculator is designed to work on smartphones,
+      tablets and computers.
+    </p>
+
+  </div>
+
+</div>
+
+
+<footer>
+
+  <p>
+    🎂 Find My Age
+  </p>
+
+  <p>
+    Birthday Calculator
+  </p>
+
+  <p>
+    © 2026 Find My Age
+  </p>
+
+</footer>
+
+
+<script>
+
+  let timer = null;
+
+  let shareText = "";
+
+
+  function startCountdown() {
+
+    const dobValue =
+      document.getElementById("dob").value;
+
+
+    if (!dobValue) {
+
+      alert(
+        "Please enter your date of birth."
+      );
+
+      return;
+    }
+
+
+    if (timer) {
+
+      clearInterval(timer);
+    }
+
+
+    updateCountdown(dobValue);
+
+
+    timer =
+      setInterval(
+        function() {
+
+          updateCountdown(dobValue);
+
+        },
+        1000
+      );
+  }
+
+
+  function updateCountdown(dobValue) {
+
+    const dob =
+      new Date(
+        dobValue + "T00:00:00"
+      );
+
+
+    const now =
+      new Date();
+
+
+    let birthday =
+      new Date(
+        now.getFullYear(),
+        dob.getMonth(),
+        dob.getDate(),
+        0,
+        0,
+        0
+      );
+
+
+    let turningAge =
+      now.getFullYear() -
+      dob.getFullYear();
+
+
+    if (birthday <= now) {
+
+      birthday =
+        new Date(
+          now.getFullYear() + 1,
+          dob.getMonth(),
+          dob.getDate(),
+          0,
+          0,
+          0
+        );
+
+      turningAge++;
+    }
+
+
+    /* February 29 handling */
+
+    if (
+      dob.getMonth() === 1 &&
+      dob.getDate() === 29
+    ) {
+
+      const year =
+        birthday.getFullYear();
+
+      const leap =
+        year % 4 === 0 &&
+        (
+          year % 100 !== 0 ||
+          year % 400 === 0
+        );
+
+
+      if (!leap) {
+
+        birthday =
+          new Date(
+            year,
+            1,
+            28,
+            0,
+            0,
+            0
+          );
+      }
+    }
+
+
+    const difference =
+      birthday - now;
+
+
+    const days =
+      Math.floor(
+        difference /
+        (1000 * 60 * 60 * 24)
+      );
+
+
+    const hours =
+      Math.floor(
+        (
+          difference %
+          (1000 * 60 * 60 * 24)
+        ) /
+        (1000 * 60 * 60)
+      );
+
+
+    const minutes =
+      Math.floor(
+        (
+          difference %
+          (1000 * 60 * 60)
+        ) /
+        (1000 * 60)
+      );
+
+
+    const seconds =
+      Math.floor(
+        (
+          difference %
+          (1000 * 60)
+        ) /
+        1000
+      );
+
+
+    document.getElementById(
+      "days"
+    ).textContent =
+      days;
+
+
+    document.getElementById(
+      "hours"
+    ).textContent =
+      hours;
+
+
+    document.getElementById(
+      "minutes"
+    ).textContent =
+      minutes;
+
+
+    document.getElementById(
+      "seconds"
+    ).textContent =
+      seconds;
+
+
+    document.getElementById(
+      "birthdayTitle"
+    ).textContent =
+      "🎉 You will turn " +
+      turningAge +
+      " years old!";
+
+
+    const formattedDate =
+      birthday.toLocaleDateString(
+        "en-IN",
+        {
+          day: "numeric",
+          month: "long",
+          year: "numeric"
+        }
+      );
+
+
+    document.getElementById(
+      "birthdayDate"
+    ).textContent =
+      "Next Birthday: " +
+      formattedDate;
+
+
+    document.getElementById(
+      "birthdayDay"
+    ).textContent =
+      "Your birthday will be on " +
+      birthday.toLocaleDateString(
+        "en-IN",
+        {
+          weekday: "long"
+        }
+      );
+
+
+    shareText =
+      "🎂 My Birthday Countdown\n\n" +
+      "I will turn " +
+      turningAge +
+      " years old on " +
+      formattedDate +
+      ".\n\n" +
+      days +
+      " days, " +
+      hours +
+      " hours, " +
+      minutes +
+      " minutes and " +
+      seconds +
+      " seconds remaining!\n\n" +
+      "Find your birthday countdown at Find My Age.";
+    
+
+    document.getElementById(
+      "countdown"
+    ).style.display =
+      "block";
+  }
+
+
+  function shareBirthday() {
+
+    if (!shareText) {
+
+      alert(
+        "Please start the countdown first."
+      );
+
+      return;
+    }
+
+
+    if (navigator.share) {
+
+      navigator.share({
+
+        title: "My Birthday Countdown",
+
+        text: shareText
+
+      });
+
+    } else {
+
+      navigator.clipboard.writeText(
+        shareText
+      )
+      .then(function() {
+
+        alert(
+          "Birthday countdown copied!"
+        );
+
+      });
+
+    }
+  }
+
+
+  function resetCountdown() {
+
+    if (timer) {
+
+      clearInterval(timer);
+
+      timer = null;
+    }
+
+
+    document.getElementById(
+      "dob"
+    ).value = "";
+
+
+    document.getElementById(
+      "countdown"
+    ).style.display =
+      "none";
+
+
+    shareText = "";
+  }
+
+</script>
+
+</body>
+
+</html>
